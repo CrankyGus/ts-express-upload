@@ -1,8 +1,12 @@
 import express from "express";
-import loggerMiddleware from "../middlewares/logger";
+import { log } from "../middlewares/logger";
+import { router as imagesRouter } from "./images";
 
 export const router = express.Router();
 
-router.use(loggerMiddleware, (req, res) => {
+router.use(imagesRouter);
+
+router.use((req, res) => {
   res.status(404).send("Sorry, the requested page doesn't exist!");
+  log.error(`${req.method} ${req.path} ${res.statusCode}`);
 });

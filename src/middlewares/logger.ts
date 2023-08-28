@@ -12,7 +12,6 @@ export default function loggerMiddleware(
   res: express.Response,
   next: express.NextFunction
 ) {
-  if (res.statusCode >= 400) log.error(res.statusCode, req.url);
-  else log.info(`${req.method} ${req.path} ${res.statusCode}`);
+  log.info(`${req.method} ${req.path}`);
   next();
 }
